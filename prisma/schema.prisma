@@ -1,0 +1,180 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model School {
+  id           String         @id @default(uuid())
+  name         String
+  address      String?
+  phone        String?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  admins       SchoolAdmin[]
+  classes      Class[]
+  students     Student[]
+  teachers     Teacher[]
+  subjects     Subject[]
+  announcements Announcement[]
+}
+
+model SchoolAdmin {
+  id        String   @id @default(uuid())
+  schoolId  String
+  school    School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  fullName  String
+  phone     String   @unique
+  login     String   @unique
+  password  String   // Hashed password
+  createdAt DateTime @default(now())
+}
+
+model Class {
+  id        String    @id @default(uuid())
+  schoolId  String
+  school    School    @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  name      String    // e.g., "5-A"
+  students  Student[]
+  assignments TeacherSubjectClass[]
+}
+
+model Student {
+  id             String          @id @default(uuid())
+  schoolId       String
+  school         School          @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  classId        String
+  class          Class           @relation(fields: [classId], references: [id], onDelete: Cascade)
+  firstName      String
+  lastName       String
+  birthDate      DateTime?
+  uniqueCode     String          @unique // Auto-generated code, e.g. ST-12345
+  createdAt      DateTime        @default(now())
+  parents        ParentStudent[]
+  grades         Grade[]
+  attendance     Attendance[]
+  quarterResults QuarterResult[]
+}
+
+model Parent {
+  id         String          @id @default(uuid())
+  phone      String          @unique
+  telegramId String?         @unique
+  fullName   String?
+  createdAt  DateTime        @default(now())
+  students   ParentStudent[]
+}
+
+model ParentStudent {
+  id        String  @id @default(uuid())
+  parentId  String
+  parent    Parent  @relation(fields: [parentId], references: [id], onDelete: Cascade)
+  studentId String
+  student   Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([parentId, studentId])
+}
+
+model Teacher {
+  id        String    @id @default(uuid())
+  schoolId  String
+  school    School    @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  fullName  String
+  phone     String    @unique
+  login     String    @unique
+  password  String    // Hashed password
+  createdAt DateTime  @default(now())
+  assignments TeacherSubjectClass[]
+  grades    Grade[]
+}
+
+model Subject {
+  id        String    @id @default(uuid())
+  schoolId  String
+  school    School    @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  name      String
+  createdAt DateTime  @default(now())
+  assignments TeacherSubjectClass[]
+  grades    Grade[]
+  attendance Attendance[]
+  quarterResults QuarterResult[]
+}
+
+model TeacherSubjectClass {
+  id        String  @id @default(uuid())
+  teacherId String
+  teacher   Teacher @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  subjectId String
+  subject   Subject @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  classId   String
+  class     Class   @relation(fields: [classId], references: [id], onDelete: Cascade)
+
+  @@unique([teacherId, subjectId, classId])
+}
+
+model Grade {
+  id        String   @id @default(uuid())
+  studentId String
+  student   Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  subjectId String
+  subject   Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  teacherId String
+  teacher   Teacher  @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  date      DateTime @default(now())
+  value     Int      // 1 to 5
+  topic     String?  // Lesson topic
+  quarter   Int      // 1, 2, 3, 4
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Attendance {
+  id        String           @id @default(uuid())
+  studentId String
+  student   Student          @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  subjectId String
+  subject   Subject          @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  date      DateTime
+  status    String           // "PRESENT", "ABSENT", "LATE" (SQLite enum alternative)
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+
+  @@unique([studentId, subjectId, date])
+}
+
+model QuarterResult {
+  id         String   @id @default(uuid())
+  studentId  String
+  student    Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  subjectId  String
+  subject    Subject  @relation(fields: [subjectId], references: [id], onDelete: Cascade)
+  quarter    Int      // 1, 2, 3, 4
+  finalGrade Float
+  confirmed  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([studentId, subjectId, quarter])
+}
+
+model Announcement {
+  id        String   @id @default(uuid())
+  schoolId  String
+  school    School   @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  text      String
+  createdAt DateTime @default(now())
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String
+  userRole  String   // e.g. "ADMIN", "TEACHER"
+  action    String   // e.g. "CREATE_GRADE", "UPDATE_ATTENDANCE"
+  entity    String   // e.g. "GRADE", "ATTENDANCE"
+  entityId  String
+  details   String?  // JSON context
+  timestamp DateTime @default(now())
+}

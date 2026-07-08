@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: ejurnal-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: jurnal_user
+      POSTGRES_PASSWORD: jurnal_pass
+      POSTGRES_DB: ejurnal
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
