@@ -7,9 +7,16 @@
   <img src="https://img.shields.io/badge/Telegram--Bot-Telegraf.js-blue?style=for-the-badge&logo=telegram" alt="Telegram Bot" />
 </p>
 
-**E-Jurnal** — bu repetitorlik markazlari, maktablar va o'quv yurtlari faoliyatini raqamlashtirish uchun mo'ljallangan, ko'p tarmoqli (multi-tenant) zamonaviy boshqaruv tizimi. Tizim maktab ma'muriyati (direktor), o'qituvchilar va ota-onalarni yagona ekotizimga birlashtiradi.
+E-Jurnal — bu repetitorlik markazlari, maktablar va o'quv yurtlari faoliyatini raqamlashtirish uchun mo'ljallangan, ko'p tarmoqli (multi-tenant) zamonaviy boshqaruv tizimi. Tizim maktab ma'muriyati (direktor), o'qituvchilar va ota-onalarni yagona ekotizimga birlashtiradi.
 
 ---
+
+## 🌐 Tillar / Languages / Языки
+
+Iltimos, qo'llanmani o'qish uchun kerakli tilni bosing / Please click on the language below to read the manual / Пожалуйста, нажмите на язык ниже, чтобы открыть руководство:
+
+<details>
+<summary><b>🇺🇿 O'zbekcha versiyasi (Ochish uchun bosing)</b></summary>
 
 ## 🌟 Tizim Imkoniyatlari
 
@@ -32,8 +39,6 @@
 * **Joriy Hisobot:** Farzandining joriy chorakdagi davomati foizi hamda barcha fanlardan o'rtacha yillik ballarini ko'rish.
 * **E'lonlar bo'limi:** Maktab ma'muriyati tomonidan yuborilgan e'lon va yangiliklarni botda o'qish.
 
----
-
 ## 🛠️ Texnologiyalar Girdobi
 
 * **Frontend & Backend:** Next.js 14 (App Router)
@@ -41,8 +46,6 @@
 * **Ma'lumotlar Bazasi:** SQLite (Mahalliy ishlab chiqish uchun)
 * **ORM:** Prisma ORM
 * **Bot Framework:** Telegraf.js
-
----
 
 ## 🚀 Loyihani Ishga Tushirish
 
@@ -81,8 +84,6 @@ npm run dev
 npm run bot
 ```
 
----
-
 ## 🔑 Test Akkauntlar
 
 | Rol | Login / Username | Parol | Qo'shimcha |
@@ -91,19 +92,15 @@ npm run bot
 | **O'qituvchi** | `jamshid_t` | `teacher123` | Sinf jurnali |
 | **Ota-ona (Test kodi)** | `ST-806DE` | - | Botda ulanish uchun (A'zamjon kodi) |
 
----
-
 ## 🛡️ Xavfsizlik Eslatmasi
 GitHub repozitoriyasiga kodlarni yuklashdan oldin `.gitignore` fayliga `.env` va `.db` (SQLite bazasi) fayllari qo'shilganligiga ishonch hosil qiling. Ushbu loyihada bu fayllar xavfsiz tarzda ignore qilingan.
+
+</details>
 
 ---
 
 <details>
 <summary><b>🇬🇧 English version (Click to expand)</b></summary>
-
-# 🖥️ E-Jurnal — Smart School Management System & Telegram Bot
-
-**E-Jurnal** is a multi-tenant modern school management system designed for tutoring centers, schools, and private educational institutions. The system integrates school administration (director), teachers, and parents into a single ecosystem.
 
 ## 🌟 System Features
 
@@ -115,7 +112,7 @@ GitHub repozitoriyasiga kodlarni yuklashdan oldin `.gitignore` fayliga `.env` va
 * **Quick Search & Filter:** Search students by name, surname, or ID code, and filter by class.
 
 ### 2. 📝 Teacher Journal
-* **Tezkor Guruhli Baholash (Batch Grading):** Write the lesson topic once and grade all students in the class in seconds using round interactive buttons.
+* **Batch Grading:** Write the lesson topic once and grade all students in the class in seconds using round interactive buttons.
 * **Attendance System:** Mark attendance (Present, Late, Absent) in a single table and notify parents.
 * **24-Hour Edit Window:** Delete or edit grades only within 24 hours to prevent errors.
 * **Quarterly Results:** Auto-calculate student averages and confirm final quarterly grades.
@@ -185,10 +182,6 @@ npm run bot
 
 <details>
 <summary><b>🇷🇺 Русская версия (Нажмите, чтобы развернуть)</b></summary>
-
-# 🖥️ E-Jurnal — Умная система управления школой и Telegram-бот
-
-**E-Jurnal** — это современная многопользовательская (multi-tenant) система управления школой, разработанная для репетиторских центров, школ и частных учебных заведений. Система объединяет администрацию школы (директора), учителей и родителей в единую экосистему.
 
 ## 🌟 Возможности системы
 
