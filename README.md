@@ -36,11 +36,11 @@
 
 ## 🛠️ Texnologiyalar Girdobi
 
-* **Frontend & Backend:** [Next.js 14](https://nextjs.org/) (App Router, Server & Client Components)
+* **Frontend & Backend:** Next.js 14 (App Router)
 * **Styling:** Vanilla CSS (Aesthetic & Glassmorphism design)
-* **Ma'lumotlar Bazasi:** [SQLite](https://www.sqlite.org/) (Mahalliy ishlab chiqish uchun yengil va tezkor)
-* **ORM:** [Prisma ORM](https://www.prisma.io/)
-* **Bot Framework:** [Telegraf.js](https://telegraf.js.org/)
+* **Ma'lumotlar Bazasi:** SQLite (Mahalliy ishlab chiqish uchun)
+* **ORM:** Prisma ORM
+* **Bot Framework:** Telegraf.js
 
 ---
 
@@ -95,3 +95,173 @@ npm run bot
 
 ## 🛡️ Xavfsizlik Eslatmasi
 GitHub repozitoriyasiga kodlarni yuklashdan oldin `.gitignore` fayliga `.env` va `.db` (SQLite bazasi) fayllari qo'shilganligiga ishonch hosil qiling. Ushbu loyihada bu fayllar xavfsiz tarzda ignore qilingan.
+
+---
+
+<details>
+<summary><b>🇬🇧 English version (Click to expand)</b></summary>
+
+# 🖥️ E-Jurnal — Smart School Management System & Telegram Bot
+
+**E-Jurnal** is a multi-tenant modern school management system designed for tutoring centers, schools, and private educational institutions. The system integrates school administration (director), teachers, and parents into a single ecosystem.
+
+## 🌟 System Features
+
+### 1. 💼 Director & Admin Panel
+* **22 Standard Class Generator:** Automatically generate standard classes from 1-A to 11-B for the school with a single click.
+* **Automatic Class Promotion:** Automatically promote all students to the next grade at the end of the academic year (e.g. `5-A` -> `6-A`).
+* **Graduates Archive:** Move 11th-grade graduates to a special `Graduates 2026-A` class without deleting them, keeping their historical grades and attendance.
+* **Student Personal Card (Academic Transcript):** View student records across years from 1st to 11th grade and download the official Uzbek transcript as a **PDF**.
+* **Quick Search & Filter:** Search students by name, surname, or ID code, and filter by class.
+
+### 2. 📝 Teacher Journal
+* **Tezkor Guruhli Baholash (Batch Grading):** Write the lesson topic once and grade all students in the class in seconds using round interactive buttons.
+* **Attendance System:** Mark attendance (Present, Late, Absent) in a single table and notify parents.
+* **24-Hour Edit Window:** Delete or edit grades only within 24 hours to prevent errors.
+* **Quarterly Results:** Auto-calculate student averages and confirm final quarterly grades.
+
+### 3. 🤖 Parent Portal (Telegram Bot)
+* **Quick Link:** Bind using parent contact phone number or child's unique ID code (e.g. `ST-806DE`).
+* **Real-time Notifications:** Instantly receive Telegram messages when grades or attendance are saved.
+* **Current Report:** View attendance percentage and average grades for the current quarter.
+* **Announcements:** Read school announcements in the bot.
+
+## 🛠️ Tech Stack
+
+* **Frontend & Backend:** Next.js 14 (App Router)
+* **Styling:** Vanilla CSS (Aesthetic & Glassmorphism design)
+* **Database:** SQLite (For local development)
+* **ORM:** Prisma ORM
+* **Bot Framework:** Telegraf.js
+
+## 🚀 Running the Project
+
+### 1. Install Dependencies
+```bash
+npm install
+```
+
+### 2. Environment Variables (.env)
+Create a `.env` file in the root folder and add the following parameters:
+```env
+DATABASE_URL="file:./dev.db"
+JWT_SECRET="any_long_secret_key"
+TELEGRAM_BOT_TOKEN="your_telegram_bot_token"
+```
+
+### 3. DB Migrations
+```bash
+npx prisma db push
+```
+
+### 4. Seed Database
+```bash
+node prisma/seed.js
+```
+
+### 5. Launch Servers
+
+**Start web dashboards (Admin & Teacher):**
+```bash
+npm run dev
+```
+
+**Start Telegram Bot daemon:**
+```bash
+npm run bot
+```
+
+## 🔑 Test Accounts
+
+| Role | Login / Username | Password | Notes |
+| :--- | :--- | :--- | :--- |
+| **Administrator (Director)** | `smart_admin` | `admin123` | School management |
+| **Teacher** | `jamshid_t` | `teacher123` | Classroom journal |
+| **Parent (Test Code)** | `ST-806DE` | - | For bot link (A'zamjon's code) |
+
+</details>
+
+---
+
+<details>
+<summary><b>🇷🇺 Русская версия (Нажмите, чтобы развернуть)</b></summary>
+
+# 🖥️ E-Jurnal — Умная система управления школой и Telegram-бот
+
+**E-Jurnal** — это современная многопользовательская (multi-tenant) система управления школой, разработанная для репетиторских центров, школ и частных учебных заведений. Система объединяет администрацию школы (директора), учителей и родителей в единую экосистему.
+
+## 🌟 Возможности системы
+
+### 1. 💼 Панель директора и администратора
+* **Генератор 22 стандартных классов:** Автоматическое создание всех стандартных классов от 1-А до 11-Б одним нажатием кнопки.
+* **Автоматический перевод классов:** Автоматический перевод всех учащихся на один класс выше в конце учебного года (например: `5-А` -> `6-А`).
+* **Архив выпускников:** Перевод выпускников 11-х классов в специальный класс `Выпускники 2026-А` без удаления данных, с сохранением их оценок и посещаемости.
+* **Личная карточка ученика (Академический транскрипт):** Просмотр успеваемости ученика с 1 по 11 класс по учебным годам и скачивание официального транскрипта в формате **PDF**.
+* **Быстрый поиск и фильтрация:** Поиск учащихся по имени, фамилии или коду ID, а также фильтрация по классам.
+
+### 2. 📝 Журнал учителя
+* **Быстрое групповое оценивание:** Запись темы урока один раз и выставление оценок всему классу за секунды с помощью удобных круглых кнопок.
+* **Система посещаемости:** Отметка присутствия (Присутствовал, Опоздал, Отсутствовал) в единой таблице с отправкой уведомлений родителям.
+* **24-часовое окно редактирования:** Возможность удаления или изменения оценок только в течение 24 часов для предотвращения ошибок.
+* **Итоговые оценки за четверть:** Автоматический расчет среднего балла ученика и подтверждение четвертных оценок.
+
+### 3. 🤖 Панель родителей (Telegram-бот)
+* **Быстрое подключение:** Привязка аккаунта по номеру телефона (поделиться контактом) или по уникальному коду ребенка (например: `ST-806DE`).
+* **Уведомления в реальном времени:** Мгновенное получение сообщений в Telegram при выставлении оценок или отметке посещаемости учителем.
+* **Текущий отчет:** Просмотр процента посещаемости и средних баллов по предметам в текущей четверти.
+* **Раздел объявлений:** Чтение школьных объявлений прямо в боте.
+
+## 🛠️ Технологический стек
+
+* **Frontend и Backend:** Next.js 14 (App Router)
+* **Дизайн:** Vanilla CSS (Aesthetic & Glassmorphism)
+* **База данных:** SQLite (Для локальной разработки)
+* **ORM:** Prisma ORM
+* **Bot Framework:** Telegraf.js
+
+## 🚀 Инструкция по запуску
+
+### 1. Установка библиотек
+```bash
+npm install
+```
+
+### 2. Настройка файла `.env`
+Создайте файл `.env` в корневой папке проекта и добавьте следующие параметры:
+```env
+DATABASE_URL="file:./dev.db"
+JWT_SECRET="любой_длинный_секретный_ключ"
+TELEGRAM_BOT_TOKEN="токен_вашего_бота"
+```
+
+### 3. Миграция базы данных
+```bash
+npx prisma db push
+```
+
+### 4. Заполнение базы данных тестовыми данными (Seed)
+```bash
+node prisma/seed.js
+```
+
+### 5. Запуск серверов
+
+**Запуск веб-панелей (Админ и Учитель):**
+```bash
+npm run dev
+```
+
+**Запуск Telegram-бота:**
+```bash
+npm run bot
+```
+
+## 🔑 Тестовые аккаунты
+
+| Роль | Логин / Имя пользователя | Пароль | Примечание |
+| :--- | :--- | :--- | :--- |
+| **Администратор (Директор)** | `smart_admin` | `admin123` | Управление школой |
+| **Учитель** | `jamshid_t` | `teacher123` | Классный журнал |
+| **Родитель (Тестовый код)** | `ST-806DE` | - | Для привязки в боте (код А'замжона) |
+
+</details>
